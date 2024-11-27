@@ -7,7 +7,7 @@ It assumes you have a debug probe (or equivalent) and the necessary tools instal
 
 ## Notes
 
-- I had to build `openocd` from source in order to get the right interfaces/targets for risc-v. I would suggest checking out the [`docs/getting-started-with-pico.pdf`](docs/getting-started-with-pico) document's section on debugging the rp2350, NOT just the raspberry pi documentation on the debug probe, which is a bit out of date. (not mentioned by the guide, but don't forget to run `make install` after building `openocd`).
+- I had to build `openocd` from source in order to get the right interfaces/targets for risc-v. I would suggest checking out the [docs/getting-started-with-pico.pdf](docs/getting-started-with-pico) document's section on debugging the rp2350, NOT just the raspberry pi documentation on the debug probe, which is a bit out of date. (not mentioned by the guide, but don't forget to run `make install` after building `openocd`).
 
 - Most of the necessary tools I've either installed via `apt` on Linux Mint or built from the source github repository, however you might also check out the pre-built binaries used by raspberry pi for their vscode extension: https://github.com/raspberrypi/pico-sdk-tools/tags
 

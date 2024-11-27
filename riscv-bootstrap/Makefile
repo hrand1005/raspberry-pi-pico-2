@@ -32,7 +32,7 @@ check: $(TARGET)
 
 build: $(TARGET)
 
-$(TARGET): $(OBJS)
+$(TARGET): $(OBJS) $(MEMMAP)
 	$(LD) $(LDFLAGS) -o $(TARGET) $(OBJS)
 
 %.o: %.S
