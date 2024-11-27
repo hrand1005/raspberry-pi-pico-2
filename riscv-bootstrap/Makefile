@@ -8,7 +8,7 @@ SRCS = startup.S
 OBJS = $(SRCS:.S=.o)
 MEMMAP = memmap.ld
 
-CFLAGS = -mabi=ilp32
+CFLAGS = -mabi=ilp32 -g
 ASFLAGS = $(CFLAGS)
 LDFLAGS = -T $(MEMMAP)
 
