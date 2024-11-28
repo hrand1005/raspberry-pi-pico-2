@@ -11,13 +11,21 @@ It assumes you have a debug probe (or equivalent) and the necessary tools instal
 
 - Most of the necessary tools I've either installed via `apt` on Linux Mint or built from the source github repository, however you might also check out the pre-built binaries used by raspberry pi for their vscode extension: https://github.com/raspberrypi/pico-sdk-tools/tags
 
-- If you don't have a debug probe, it's also possible to simply use a second raspberry pi pico running a debugging firmware, see [`docs/getting-started-with-pico.pdf`](docs/getting-started-with-pico) appendix A.
+- If you don't have a debug probe, it's also possible to simply use a second raspberry pi pico running a debugging firmware, see [docs/getting-started-with-pico.pdf](docs/getting-started-with-pico) appendix A.
 
 - Section 2.10 of the [c/c++ sdk documentation](docs/raspberry-pi-pico-c-sdk.pdf) provides useful instructions (and exact configuration options) for building the RISC-V toolchain from source.
 
 - Compiling examples with RISC-V and the pico sdk requires `-DPICO_PLATFROM=rp2350-riscv` (when running `cmake`).
 
-- `bfd len 8 target len 0` --> temporarily solved by assembling with -mabi=ilp32
+- `bfd len 8 target len 0` --> solved by assembling with `-mabi=ilp32`
+
+- If you do weird things and find your flash is corrupted (and your board is seemingly unresponsive when being flashed with `openocd`), compile a simple program like blinky from (pico-examples)[https://github.com/raspberrypi/pico-examples]. Instead of using the debug probe, put the board in BOOTSEL mode and load the blinky uf2 like you'd see in the getting-started instructions. This seems to clear up any corrupted state, and you can return to normal development afterwards. 
+
+- If you find gdb isn't proceeding after a break statement (e.g. you hit `ebreak` and then hit continue, but the debugger doesn't make any progress and you're stuck at the same instruction), you can manually increment the program counter: `set $pc = $pc + 0x4`. Then you should be able to continue.
+
+- I had a hard time getting things to work (at least debugging) when compiling/assembling with the `zca`, `zcb`, and `zcmp` extensions, which are used to compress instructions. Hence they are not set for `-march` in the riscv-bootstrap Makefile. I'm not sure whether this was due to some other misconfiguration/linking on my part, a problem with debugging (including how the debug probe interacts with compressed instructions), or both. In any case, after assembling and linking the boostrap program with those extensions, and flashing them to the board with the debugger, both cores become unresponsive. To recover the board / debugger functionality, I put the board in BOOTSEL and then cp blink.uf2 to it.
+
+- I added a function `ic` to `riscv-bootstrap/init.gdb` that increments the program counter before continuing, and now use that instead of `c` in `gdb`.
 
 ## External Resources
 
