@@ -36,6 +36,7 @@ SECTIONS
         /* 64-byte alignment necessary if mtvec MODE field is 'Vectored' */
         . = ALIGN(64);
         KEEP (*(.vectors))
+        . = ALIGN(4);
         __image_def_start = .;
         KEEP (*(.image_def))
         __image_def_end = .;
