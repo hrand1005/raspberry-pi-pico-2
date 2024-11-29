@@ -1,7 +1,7 @@
 /**
  * This entry point will be located at the binary's the lowest address.
  * It is the first thing the bootrom will execute after interpreting the
- * metadata in the binary info header section.
+ * metadata in the image definition section.
  */
 .section .reset, "ax"
 .global _entry_point
@@ -14,13 +14,13 @@ _reset_handler:
     j _reset_handler
 
 /**
- * Note that in X mode, the vector table must be 64 byte aligned.
+ * Note that in 'Vectored' mode, the vector table must be 64 byte aligned.
  * See rp2350 datasheet section 3.8.4.2.1
  * See riscv-privileged-20211203 section 3.1.7
  */
 .section .vectors, "ax"
 
-/** Disable compressed instructions for vector table */
+/** Disable compressed encodings */
 .option push
 .option norvc
 .option norelax
