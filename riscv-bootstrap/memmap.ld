@@ -33,6 +33,8 @@ SECTIONS
     .text : {
         /* reset section contains _entry_point */
         KEEP (*(.reset))
+        /* 64-byte alignment necessary if mtvec MODE field is 'Vectored' */
+        . = ALIGN(64);
         KEEP (*(.vectors))
         __image_def_start = .;
         KEEP (*(.image_def))

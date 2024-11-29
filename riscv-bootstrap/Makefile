@@ -9,7 +9,8 @@ OBJS = $(SRCS:.S=.o)
 MEMMAP = memmap.ld
 
 CFLAGS = -mabi=ilp32 -misa-spec=20191213 -mpriv-spec=1.12 \
-		 -march=rv32ima_zicsr_zifencei_zba_zbb_zbkb_zbs -g
+		 -march=rv32ima_zicsr_zifencei_zba_zbb_zbkb_zbs_zca_zcb_zcmp -g
+
 ASFLAGS = $(CFLAGS)
 LDFLAGS = -T $(MEMMAP)
 

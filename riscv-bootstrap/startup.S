@@ -9,6 +9,7 @@ _entry_point:
     j _reset_handler
 
 _reset_handler:
+    /** TODO: bootstrap the system */
     ebreak
     j _reset_handler
 
@@ -18,8 +19,15 @@ _reset_handler:
  * See riscv-privileged-20211203 section 3.1.7
  */
 .section .vectors, "ax"
-.p2align 6
-       /** TODO: implement the riscv vector table */
+
+/** Disable compressed instructions for vector table */
+.option push
+.option norvc
+.option norelax
+
+       /** TODO: define vector table */
+
+.option pop
        
 /**
  * This is the initial IMAGE_DEF item.
