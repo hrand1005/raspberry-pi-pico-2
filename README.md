@@ -25,6 +25,8 @@ It assumes you have a debug probe (or equivalent) and the necessary tools instal
 
 - If you want to know more about the boot sequence before your defined bootloader is identified/selected/executed, see rp2350 datasheet section 5.2.
 
+- If you poke around the SDK, or disassemble example programs built with the sdk (as I have), you will probably see some writes to addresses that don't map to any registers. These may be offests of a known register to perform an atomic write. For more information, see the rp2350 datasheet section 2.1.3.
+
 ## External Resources
 
 - [Getting Started MicroPython Tutorial](https://projects.raspberrypi.org/en/projects/getting-started-with-the-pico)
